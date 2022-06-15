@@ -14,3 +14,25 @@ Logging allows developers to monitor the flow of a program with actions taken. Y
 3. Warning shows that something unexpected occurred, or that a problem might occur in the near future (low disk space, for example).
 4. Error indicates a serious problem, like the program failed to execute some functionality.
 5. Critical shows the occurrence of a serious error in the application, such as a program failure.
+
+
+## Basic Code:
+
+```
+from flask import Flask
+import logging
+
+logging.basicConfig(filename='record.log', level=logging.DEBUG)
+app = Flask(__name__)
+
+@app.route('/')
+def main():
+  # showing different logging levels
+  app.logger.debug("debug log info")
+  app.logger.info("Info log information")
+  app.logger.warning("Warning log info")
+  app.logger.error("Error log info")
+  app.logger.critical("Critical log info")
+  return "testing logging levels."
+
+```
