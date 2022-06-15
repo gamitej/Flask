@@ -22,7 +22,7 @@ Logging allows developers to monitor the flow of a program with actions taken. Y
 from flask import Flask
 import logging
 
-logging.basicConfig(filename='record.log', level=logging.DEBUG)
+logging.basicConfig(filename='record.log', level=logging.INFO)
 app = Flask(__name__)
 
 @app.route('/')
