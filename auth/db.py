@@ -1,6 +1,6 @@
 from flask import Flask,jsonify
 
-userDb = {"amitej":'1234',"singh":'4321'}
+userDb = {"Amitej":'1234',"singh":'4321'}
 
 def getUser(userName,passwd):
     if userName in userDb:

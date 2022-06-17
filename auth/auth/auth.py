@@ -13,4 +13,3 @@ def login():
         return res
     except Exception as e:
         return jsonify({"msg":'Error Occured'}),500
-        
