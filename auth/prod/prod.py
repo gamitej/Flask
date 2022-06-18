@@ -4,6 +4,7 @@ from db import prodAvailList,prodById,allProd
 
 prod = Blueprint('prod', __name__)
 
+# ********** GET REQUEST **********
 @prod.route('/')
 def prodList():
     res = allProd()
@@ -20,4 +21,3 @@ def prodName(name):
     if res:
         return jsonify({"msg":"Product Avail"}),200
     return jsonify({"msg":"Product not found"}),404
-

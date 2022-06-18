@@ -10,6 +10,7 @@ def getUser(userName, passwd):
         return jsonify({"msg": 'Password Incorrect'}), 401
     return jsonify({"msg": 'Username Incorrect'}), 401
 
+
 def addUser(userName, passwd):
     if userName in userDb:
         return jsonify({"msg": "User already exist"}), 409
@@ -18,10 +19,13 @@ def addUser(userName, passwd):
 
 # ********************** PRODUCT *******************************
 
+
 prods = {2: {"name": "Chair", "Qua": 2}, 3: {"name": "Table", "Qua": 3},
          1: {"name": "Fan", "Qua": 1}, 4: {"name": "Bed", "Qua": 0}}
 
-prodAvail = {"Chair", "Fan", "Table", "Fan"}
+prodAvail = [{"name": "Chair"}, {"name": "Fan"},
+             {"name": "Table"}, {"name": "Fan"}]
+
 
 def allProd():
     lis = []
@@ -29,11 +33,12 @@ def allProd():
         lis.append(prods[i]['name'])
     return lis
 
+
 def prodById(id):
     return prods[id]
 
 
 def prodAvailList(name):
     if name in prodAvail:
-        return True 
+        return True
     return False
