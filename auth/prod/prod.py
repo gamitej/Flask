@@ -12,8 +12,11 @@ def prodList():
 
 @prod.route('/<int:id>')
 def prodId(id):
-    res = prodById(id)
-    return jsonify(res)
+    res,msg = prodById(id)
+    print(res,msg)
+    if res:
+        return jsonify(msg),200
+    return jsonify(msg),404
 
 @prod.route('/<string:name>')
 def prodName(name):

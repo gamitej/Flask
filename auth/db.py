@@ -28,14 +28,13 @@ prodAvail = [{"name": "Chair"}, {"name": "Fan"},
 
 
 def allProd():
-    lis = []
-    for i in prods:
-        lis.append(prods[i]['name'])
-    return lis
+    return prodAvail
 
 
 def prodById(id):
-    return prods[id]
+    if id in prods:
+        return True,prods[id]
+    return False,{"msg":"Not found"}
 
 
 def prodAvailList(name):
