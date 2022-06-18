@@ -24,7 +24,7 @@ prods = {2: {"name": "Chair", "Qua": 2}, 3: {"name": "Table", "Qua": 3},
          1: {"name": "Fan", "Qua": 1}, 4: {"name": "Bed", "Qua": 0}}
 
 prodAvail = [{"name": "Chair"}, {"name": "Fan"},
-             {"name": "Table"}, {"name": "Fan"}]
+             {"name": "Table"}, {"name": "Bed"}]
 
 
 def allProd():
