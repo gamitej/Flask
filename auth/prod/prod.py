@@ -1,6 +1,6 @@
 from flask import Blueprint
-from flask import Flask,jsonify
-from db import prodAvail,prodById,allProd
+from flask import jsonify
+from db import prodAvailList,prodById,allProd
 
 prod = Blueprint('prod', __name__)
 
@@ -16,6 +16,8 @@ def prodId(id):
 
 @prod.route('/<string:name>')
 def prodName(name):
-    res = prodAvail(name)
-    return jsonify(res)
+    res = prodAvailList(name)
+    if res:
+        return jsonify({"msg":"Product Avail"}),200
+    return jsonify({"msg":"Product not found"}),404
 

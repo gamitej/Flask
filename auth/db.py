@@ -33,7 +33,7 @@ def prodById(id):
     return prods[id]
 
 
-def prodAvail(name):
+def prodAvailList(name):
     if name in prodAvail:
         return True 
     return False
