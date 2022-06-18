@@ -17,6 +17,7 @@ def addUser(userName, passwd):
     userDb[userName] = passwd
     return jsonify({"msg": "SignUp SuccessFull"}), 200
 
+# ********************** PRODUCT *******************************
 
 prods = {2: {"name": "Chair", "Qua": 2}, 3: {"name": "Table", "Qua": 3},
          1: {"name": "Fan", "Qua": 1}, 4: {"name": "Bed", "Qua": 0}}
