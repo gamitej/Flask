@@ -29,5 +29,5 @@ def tokenCheck(token,time,reqRoute):
             if reqRoute:
                 userToken[user]["time"] = userToken[user]["time"] + timedelta(minutes=2)
             return True,{"msg":"Success"} 
-        return False,{"msg":"Token Expired"} 
+        return False,{"msg":"Token Expired Please Login Again"} 
     return False,{"msg":"Token Invalid"}
