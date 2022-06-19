@@ -19,7 +19,17 @@ def detail():
     req = request.get_json()
     token = req["token"]
     time = datetime.now()
-    res,msg = tokenCheck(token,time)
+    res,msg = tokenCheck(token,time,False)
+    if res:
+        return jsonify(msg),200
+    return jsonify(msg),400
+
+@app.route('/summary',methods=['POST'])
+def summary():
+    req = request.get_json()
+    token = req["token"]
+    time = datetime.now()
+    res,msg = tokenCheck(token,time,True)
     if res:
         return jsonify(msg),200
     return jsonify(msg),400

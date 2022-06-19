@@ -1,5 +1,5 @@
 import uuid 
-from datetime import datetime
+from datetime import datetime,timedelta
 
 userDb = {"amitej":'1234',"singh":'4321'}
 
@@ -18,14 +18,16 @@ def authUser(user,passwd):
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
-def tokenCheck(token,time):
+def tokenCheck(token,time,reqRoute):
     if token not in tokenUser:
         return False,{"msg":"Token Not Found"}
     user = tokenUser[token]
     if user in userToken and userToken[user]["status"] and userToken[user]["token"] == token:
         timeDiff = time - userToken[user]["time"]
         if timeDiff.seconds <= 120:
+            # for requested route we will increase the expire time by 1 min
+            if reqRoute:
+                userToken[user]["time"] = userToken[user]["time"] + timedelta(minutes=2)
             return True,{"msg":"Success"} 
         return False,{"msg":"Token Expired"} 
     return False,{"msg":"Token Invalid"}
-
