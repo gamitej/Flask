@@ -25,9 +25,9 @@ def tokenCheck(token,time,reqRoute):
     if user in userToken and userToken[user]["status"] and userToken[user]["token"] == token:
         timeDiff = time - userToken[user]["time"]
         if timeDiff.seconds <= 120:
-            # for requested route we will increase the expire time by 1 min
+            # for requested route we will increase the expire time by 3 min
             if reqRoute:
-                userToken[user]["time"] = userToken[user]["time"] + timedelta(minutes=2)
+                userToken[user]["time"] = userToken[user]["time"] + timedelta(minutes=3)
             return True,{"msg":"Success"} 
         return False,{"msg":"Token Expired Please Login Again"} 
     return False,{"msg":"Token Invalid"}
