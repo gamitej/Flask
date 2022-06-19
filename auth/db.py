@@ -30,7 +30,6 @@ prodAvail = [{"name": "Chair"}, {"name": "Fan"},
 def allProd():
     return prodAvail
 
-
 def prodById(id):
     if id in prods:
         return True,prods[id]
