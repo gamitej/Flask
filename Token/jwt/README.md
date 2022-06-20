@@ -10,4 +10,4 @@ JWT is a token based stateless authentication mechanism. Since it is a client-si
 
 ## Structure of JWT :-
 
-header,payload,signature
+header.payload.signature
