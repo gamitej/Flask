@@ -7,3 +7,7 @@ It is compact, readable and digitally signed using a private key/ or a public ke
 The purpose of using JWT is not to hide data but to ensure the authenticity of the data. JWT is signed and encoded, not encrypted.
 
 JWT is a token based stateless authentication mechanism. Since it is a client-side based stateless session, server doesn’t have to completely rely on a datastore(database) to save session information.
+
+## Structure of JWT :-
+
+header,payload,signature
