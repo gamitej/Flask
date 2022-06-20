@@ -11,3 +11,6 @@ JWT is a token based stateless authentication mechanism. Since it is a client-si
 ## Structure of JWT :-
 
 header.payload.signature
+
+### Header
+The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.
