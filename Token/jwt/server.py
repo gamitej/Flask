@@ -1,6 +1,8 @@
 from flask import Flask,request,jsonify
+from flask_jwt import JWT,jwt_required 
 
 app = Flask(__name__)
+app.secret_key = 'ami'
 
 @app.route('/')
 def home():
