@@ -11,7 +11,7 @@ app.secret_key = 'amitej'
 def token_req(f):
     @wraps(f)
     def decorated(*args,**kwargs):
-        token = request.args('token') # /route?token = asda788dasds
+        token = request.args.get('token') # /route?token = asda788dasds
         if not token:
             return jsonify({"msg":"Token Missing!!"}),403
         try:
@@ -38,9 +38,11 @@ def login():
 def home():
     return "Welcome To Home Page"
 
+
 @app.route('/details')
+@token_req
 def details():
-    return "Welcome To Home Page"
+    return "Welcome To Details Page"
 
 
 
