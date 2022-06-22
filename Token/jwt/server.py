@@ -12,7 +12,15 @@ def token_req(f):
     @wraps(f)
     def decorated(*args,**kwargs):
         token = request.args('token') # /route?token = asda788dasds
-        
+        if not token:
+            return jsonify({"msg":"Token Missing!!"}),403
+        try:
+            data = jwt.decode(token,app.secret_key)
+        except:
+            return jsonify({"msg":"Token Invalid!!"}),403
+
+        return f(*args,**kwargs)
+    return decorated
 
 @app.route('/login',methods=["POST"])
 def login():
