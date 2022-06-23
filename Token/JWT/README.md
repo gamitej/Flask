@@ -20,3 +20,5 @@ The second part of the token is the payload, which contains the claims. Claims a
 
 ### Signature
 To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
+
+### Use Of Decorater [link](https://www.freecodecamp.org/news/python-decorators-explained-with-examples/)
