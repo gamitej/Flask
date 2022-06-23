@@ -21,3 +21,22 @@ def my_func():
 
     pass
 ```
+
+### Functools wraps will update the decorator with the decorated functions attributes.
+
+```
+from functools import wraps
+
+def my_decorator_func(func):
+
+    @wraps(func)
+    def wrapper_func(*args, **kwargs):
+        func(*args, **kwargs)
+    return wrapper_func
+
+@my_decorator_func
+def my_func(my_args):
+    '''Example docstring for function'''
+
+    pass
+```
