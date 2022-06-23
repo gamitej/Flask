@@ -22,7 +22,8 @@ def my_func():
     pass
 ```
 
-## Functools wraps will update the decorator with the decorated functions attributes.
+## Functools wraps :-
+It will update the decorator with the decorated functions attributes.
 
 ```
 from functools import wraps
