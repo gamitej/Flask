@@ -9,8 +9,8 @@ The purpose of using JWT is not to hide data but to ensure the authenticity of t
 JWT is a token based stateless authentication mechanism. Since it is a client-side based stateless session, server doesn’t have to completely rely on a datastore(database) to save session information.
 
 ## Structure of JWT :-
-
-header.payload.signature
+ 
+( header.payload.signature )
 
 ### Header
 The header typically consists of two parts: the type of the token, which is JWT, and the signing algorithm being used, such as HMAC SHA256 or RSA.

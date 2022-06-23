@@ -38,7 +38,6 @@ def login():
 def home():
     return "Welcome To Home Page"
 
-
 @app.route('/details')
 @token_req
 def details():
