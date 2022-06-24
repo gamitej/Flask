@@ -4,3 +4,9 @@
 2. The Api's request should only be accepted when the token is valid.
 3. User will make request to a particular endpoint like ('/summary') then increase the expiry time by 3 minutes.
 4. For normal endpoint like ('/details) just check the token validity.
+
+## To run 
+
+```
+python3 server.py
+```
