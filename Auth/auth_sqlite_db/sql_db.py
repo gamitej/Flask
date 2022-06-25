@@ -1,9 +1,4 @@
-from curses import curs_set
 import sqlite3
-from venv import create
-
-from numpy import insert
-from soupsieve import select
 
 connection = sqlite3.connect('data.db')
 
