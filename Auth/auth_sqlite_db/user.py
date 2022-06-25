@@ -1,6 +1,4 @@
 import sqlite3
-from tkinter.messagebox import NO
-
 
 class User:
     def __init__(self,_id,username,password):
@@ -8,7 +6,8 @@ class User:
         self.username = username
         self.password = password
     
-    def findByUserName(self,username):
+    @classmethod
+    def findByUserName(cls,username):
         connection = sqlite3.connect('data.db')
         cursor = connection.cursor()
 
@@ -17,7 +16,7 @@ class User:
 
         row = result.fetchone()
         if row:
-            user = User(*row)
+            user = row
         else:
             user = None
 
