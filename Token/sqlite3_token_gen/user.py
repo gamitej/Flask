@@ -35,6 +35,7 @@ def tokenCheck(token,time,reqRoute):
     row = result.fetchone()
     if not row:
         return False,{"msg":"Token Not Found"}
+    # ----- To convert into datetime format
     expire_time = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f') 
     timeDiff = datetime.now() - expire_time
     if timeDiff.seconds <= 120:
