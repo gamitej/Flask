@@ -19,6 +19,7 @@ create_table = '''
             user_id text,
             token VARCHAR(25) NOT NULL,
             expire_time date NOT NULL,
+            time_limit int NOT NULL,
             PRIMARY KEY (user_id),
             CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
         )
