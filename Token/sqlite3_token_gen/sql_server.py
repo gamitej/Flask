@@ -33,12 +33,5 @@ insert_query = "INSERT OR IGNORE INTO users VALUES(?,?,?)"
 
 cursor.executemany(insert_query,users)
 
-user = (1,'amitej',datetime.now())
-
-insert_query = "INSERT OR IGNORE INTO users_token VALUES(?,?,?)"
-
-cursor.execute(insert_query,user)
-
-
 connection.commit()
 connection.close()

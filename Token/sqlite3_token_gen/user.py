@@ -4,18 +4,24 @@ from datetime import date, datetime,timedelta
 
 def connect_to_db():
     connection = sqlite3.connect('data.db')
-    cursor = connection.cursor()
-    return cursor 
+    return connection
     
 def authUser(username,password):
-    cursor = connect_to_db()
+    connection = connect_to_db()
+    cursor = connection.cursor()
     query = "select user_id,password from users where username=?"
     result =  cursor.execute(query,(username,))
     row = result.fetchone()
     if row:
-        if row[1] == password:
+        user_id,passwd = row[0],row[1]
+        if passwd == password:
             token = uuid.uuid1().hex
             time = datetime.now()
+            user = (user_id,token,time)
+            insert_query = "INSERT OR IGNORE INTO users_token VALUES(?,?,?)"
+            cursor.execute(insert_query,user)
+            connection.commit()
+            connection.close()
             return True,{"token":token} 
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
