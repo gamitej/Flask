@@ -30,7 +30,7 @@ def authUser(username,password):
 def tokenCheck(token,time,reqRoute):
     connection = connect_to_db()
     cursor = connection.cursor()
-    query = "select expire_time from user_token where token=?"
+    query = "select expire_time from users_token where token=?"
     result =  cursor.execute(query,(token,))
     row = result.fetchone()
     if not row:
