@@ -37,11 +37,14 @@ def tokenCheck(token,time,reqRoute):
         return False,{"msg":"Token Not Found"}
     # ----- To convert into datetime format
     expire_time = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f') 
-    timeDiff = datetime.now() - expire_time
+    timeDiff = time - expire_time
     if timeDiff.seconds <= 120:
         # for requested route we will increase the expire time by 3 min
         if reqRoute:
+            update_query = "UPDATE users_token SET expire_time = ? where token = ?"
             new_expire_time = expire_time + timedelta(minutes=3)
+            update = (new_expire_time,token)
+            cursor.execute(update_query,update)
         return True,{"msg":"Success"} 
     return False,{"msg":"Token Expired Please Login Again"} 
 
