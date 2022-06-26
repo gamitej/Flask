@@ -26,24 +26,26 @@ def authUser(username,password):
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
-'''
+
 def tokenCheck(token,time,reqRoute):
-    if token not in tokenUser:
+    connection = connect_to_db()
+    cursor = connection.cursor()
+    query = "select expire_time from users where token=?"
+    result =  cursor.execute(query,(token,))
+    row = result.fetchone()
+    if not row:
         return False,{"msg":"Token Not Found"}
-    user = tokenUser[token]
-    if user in userToken and userToken[user]["status"] and userToken[user]["token"] == token:
-        timeDiff = time - userToken[user]["time"]
-        if timeDiff.seconds <= 120:
-            # for requested route we will increase the expire time by 3 min
-            if reqRoute:
-                userToken[user]["time"] = userToken[user]["time"] + timedelta(minutes=3)
-            return True,{"msg":"Success"} 
-        return False,{"msg":"Token Expired Please Login Again"} 
-    return False,{"msg":"Token Invalid"}
+    expire_time = row[0]
+    timeDiff = datetime.now() - expire_time
+    if timeDiff.seconds <= 120:
+        # for requested route we will increase the expire time by 3 min
+        if reqRoute:
+            new_expire_time = expire_time + timedelta(minutes=3)
+        return True,{"msg":"Success"} 
+    return False,{"msg":"Token Expired Please Login Again"} 
 
 query2 = "select expire_time from users_token where user_id=?"
 result =  cursor.execute(query2,(1,))
 r = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f')
 time = r-datetime.now()
 print(time.seconds)
-'''
