@@ -33,8 +33,6 @@ def updateTable(table_name,rows_to_update,where_cond,values):
 
 
 def authUser(username,password):
-    connection = connect_to_db()
-    cursor = connection.cursor()
     rows,table_name,find_by_row,value = "user_id,password","users","username",username
     row = fetchOneRow(rows,table_name,find_by_row,value)
     if row:
