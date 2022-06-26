@@ -53,8 +53,8 @@ def authUser(username, password):
                 insertIntoTable(table_name, total_values, values)
                 return True, {"token": token}
             # -------- UPDATE THE TOKEN IF TOKEN IS ALREADY PRESENT -------
-            new_value = (time, token,user_id)
-            table_name, rows_to_update, where_cond, values = "users_token", "expire_time = ?,token = ?", "user_id = ?", new_value
+            new_value = (time, token,2,user_id)
+            table_name, rows_to_update, where_cond, values = "users_token", "expire_time = ?,token = ?,time_limit = ?", "user_id = ?", new_value
             updateTable(table_name, rows_to_update, where_cond, values)
             return True, {"token": token}
         return False, {"msg": "Incorrect Password"}
