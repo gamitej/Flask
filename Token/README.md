@@ -41,3 +41,29 @@ def my_func(my_args):
 
     pass
 ```
+
+
+## Calling file from different folder
+
+By default, you can't. When importing a file, Python only searches the directory that the entry-point script is running from and sys.path which includes locations such as the package installation directory 
+
+1. To check the available paths
+
+```
+import sys
+print(sys.path)
+```
+
+2. Append the path in which your file is present
+
+```
+import sys 
+sys.path.append('/home/amitej/Learning/Flask/Token/sqlite3_token_gen')
+print(sys.path)
+```
+
+3. Now simply call the file name as
+
+```
+from file_name import func_name or class_name
+```
