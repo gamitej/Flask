@@ -52,6 +52,9 @@ def authUser(username,password):
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
+def stringToDateTime(value):
+    new_value = datetime.strptime(value,'%Y-%m-%d %H:%M:%S.%f')    
+    return new_value
 
 def tokenCheck(token,time,reqRoute):
     connection = connect_to_db()
@@ -62,7 +65,7 @@ def tokenCheck(token,time,reqRoute):
     if not row:
         return False,{"msg":"Token Not Found"}
     # ----- To convert into datetime format -------
-    expire_time = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f') 
+    expire_time = stringToDateTime(row[0]) 
     timeDiff = time - expire_time
     if timeDiff.seconds <= 120:
         # for requested route we will increase the expire time by 3 min
