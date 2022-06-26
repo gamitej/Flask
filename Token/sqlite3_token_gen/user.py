@@ -6,7 +6,10 @@ from datetime import date, datetime, timedelta
 def connect_to_db():
     connection = sqlite3.connect('data.db')
     return connection
-
+    
+def stringToDateTime(value):
+    new_value = datetime.strptime(value, '%Y-%m-%d %H:%M:%S.%f')
+    return new_value
 
 def fetchOneRow(rows, table_name, find_by_row, value):
     connection = connect_to_db()
@@ -17,7 +20,6 @@ def fetchOneRow(rows, table_name, find_by_row, value):
     connection.close()
     return row
 
-
 def insertIntoTable(table_name, total_values, values):
     connection = connect_to_db()
     cursor = connection.cursor()
@@ -26,7 +28,6 @@ def insertIntoTable(table_name, total_values, values):
     connection.commit()
     connection.close()
 
-
 def updateTable(table_name, rows_to_update, where_cond, values):
     connection = connect_to_db()
     cursor = connection.cursor()
@@ -34,7 +35,6 @@ def updateTable(table_name, rows_to_update, where_cond, values):
     cursor.execute(update_query, values)
     connection.commit()
     connection.close()
-
 
 def authUser(username, password):
     rows, table_name, find_by_row, value = "user_id,password", "users", "username", username
@@ -59,12 +59,6 @@ def authUser(username, password):
             return True, {"token": token}
         return False, {"msg": "Incorrect Password"}
     return False, {"msg": "Username not found"}
-
-
-def stringToDateTime(value):
-    new_value = datetime.strptime(value, '%Y-%m-%d %H:%M:%S.%f')
-    return new_value
-
 
 def tokenCheck(token, time, reqRoute):
     connection = connect_to_db()
