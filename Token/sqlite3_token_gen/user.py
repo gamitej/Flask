@@ -45,6 +45,8 @@ def tokenCheck(token,time,reqRoute):
             new_expire_time = expire_time + timedelta(minutes=3)
             update = (new_expire_time,token)
             cursor.execute(update_query,update)
+            connection.commit()
+            connection.close()
         return True,{"msg":"Success"} 
     return False,{"msg":"Token Expired Please Login Again"} 
 
