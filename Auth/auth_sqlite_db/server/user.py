@@ -8,18 +8,23 @@ class User:
     
     @classmethod
     def findByUserName(cls,username):
-        connection = sqlite3.connect('data.db')
-        cursor = connection.cursor()
+        try:
+            connection = sqlite3.connect('data.db')
+            cursor = connection.cursor()
 
-        query = "SELECT * FROM users WHERE username=?"
-        result =  cursor.execute(query,(username,))
+            query = "SELECT * FROM users WHERE username=?"
+            result =  cursor.execute(query,(username,))
 
-        row = result.fetchone()
-        if row:
-            user = row
-        else:
-            user = None
+            row = result.fetchone()
+            if row:
+                user = row
+            else:
+                user = None
+            connection.close()
+            return user
 
-        connection.close()
-
-        return user
+        except Exception as e:
+            print("*** DB ERROR ***")
+            print(e)
+        
+        
