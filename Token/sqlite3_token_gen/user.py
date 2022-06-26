@@ -7,11 +7,21 @@ def connect_to_db():
     return connection
 
 def fetchOneRow(rows,table_name,find_by_row,value):
-    cursor = connect_to_db()
+    connection = connect_to_db()
+    cursor = connection.cursor()
     query = f"select {rows} from {table_name} where {find_by_row}=?"
     result =  cursor.execute(query,(value,))
     row = result.fetchone()
+    connection.close()
     return row
+
+def insertIntoTable(table_name,total_values,values):
+    connection = connect_to_db()
+    cursor = connection.cursor()
+    insert_query = f"INSERT OR IGNORE INTO {table_name} VALUES{total_values}"
+    cursor.execute(insert_query,values)
+    connection.commit()
+    connection.close()
 
 def authUser(username,password):
     connection = connect_to_db()
@@ -23,14 +33,13 @@ def authUser(username,password):
         if passwd == password:
             token = uuid.uuid1().hex
             time = datetime.now()
-            user = (user_id,token,time)
-            rows = "user_id,password"
-            #row = fetchOneRow("users_token",token,rows,"username")
-            insert_query = "INSERT OR IGNORE INTO users_token VALUES(?,?,?)"
-            cursor.execute(insert_query,user)
-            connection.commit()
-            connection.close()
-            return True,{"token":token} 
+            rows,table_name,find_by_row,value = "*","users_token","token",token
+            row = fetchOneRow(rows,table_name,find_by_row,value)
+            if not row:
+                user = (user_id,token,time)
+                table_name,total_values,values = "users_token","(?,?,?)",user
+                insertIntoTable(table_name,total_values,values)
+                return True,{"token":token} 
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
