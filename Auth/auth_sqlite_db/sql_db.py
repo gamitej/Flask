@@ -7,7 +7,7 @@ cursor = connection.cursor()
 create_table = "CREATE TABLE users (id int,username text, password text)"
 cursor.execute(create_table)
 
-#---------- INSERT SINGLE ROW ---------------
+#---------- INSERT SINGLE ROW --------------
 
 user = (1,'amitej','1234')
 
