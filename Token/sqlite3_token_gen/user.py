@@ -6,9 +6,9 @@ def connect_to_db():
     connection = sqlite3.connect('data.db')
     return connection
 
-def fetchOneRow(value,rows,where_cond_row):
+def fetchOneRow(rows,table_name,find_by_row,value):
     cursor = connect_to_db()
-    query = f"select {rows} from users where {where_cond_row}=?"
+    query = f"select {rows} from {table_name} where {find_by_row}=?"
     result =  cursor.execute(query,(value,))
     row = result.fetchone()
     return row
@@ -16,14 +16,16 @@ def fetchOneRow(value,rows,where_cond_row):
 def authUser(username,password):
     connection = connect_to_db()
     cursor = connection.cursor()
-    rows = "user_id,password"
-    row = fetchOneRow(username,rows,"username")
+    rows,table_name,find_by_row,value = "user_id,password","users","username",username
+    row = fetchOneRow(rows,table_name,find_by_row,value)
     if row:
         user_id,passwd = row[0],row[1]
         if passwd == password:
             token = uuid.uuid1().hex
             time = datetime.now()
             user = (user_id,token,time)
+            rows = "user_id,password"
+            #row = fetchOneRow("users_token",token,rows,"username")
             insert_query = "INSERT OR IGNORE INTO users_token VALUES(?,?,?)"
             cursor.execute(insert_query,user)
             connection.commit()
