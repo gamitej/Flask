@@ -23,6 +23,15 @@ def insertIntoTable(table_name,total_values,values):
     connection.commit()
     connection.close()
 
+def updateTable(table_name,rows_to_update,where_cond,values):
+    connection = connect_to_db()
+    cursor = connection.cursor()
+    update_query = f"UPDATE {table_name} SET {rows_to_update} where {where_cond}"    
+    cursor.execute(update_query,values)
+    connection.commit()
+    connection.close()
+
+
 def authUser(username,password):
     connection = connect_to_db()
     cursor = connection.cursor()
@@ -61,12 +70,12 @@ def tokenCheck(token,time,reqRoute):
         # for requested route we will increase the expire time by 3 min
         if reqRoute:
             # ---------- UPDATE THE TOKEN EXPIRE TIME ------------
-            update_query = "UPDATE users_token SET expire_time = ? where token = ?"
             new_expire_time = expire_time + timedelta(minutes=3)
-            update = (new_expire_time,token)
-            cursor.execute(update_query,update)
-            connection.commit()
-            connection.close()
+            value_to_update = (new_expire_time,token)
+            table_name,rows_to_update,where_cond,values = "users_token","expire_time = ?","token = ?",value_to_update
+            updateTable(table_name,rows_to_update,where_cond,values)
+            #update_query = "UPDATE users_token SET expire_time = ? where token = ?"
+            
             # ---------- UPDATE THE TOKEN EXPIRE TIME ------------
         return True,{"msg":"Success"} 
     return False,{"msg":"Token Expired Please Login Again"} 
