@@ -1,23 +1,26 @@
 import uuid
 import sqlite3 
-from datetime import datetime,timedelta
+from datetime import date, datetime,timedelta
 
 def connect_to_db():
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()
     return cursor 
     
-def authUser(user,passwd):
-    if user in userDb:
-        if userDb[user] == passwd:
+def authUser(username,password):
+    cursor = connect_to_db()
+    query = "select user_id,password from users where username=?"
+    result =  cursor.execute(query,(username,))
+    row = result.fetchone()
+    if row:
+        if row[1] == password:
             token = uuid.uuid1().hex
-            userToken[user] = {"status":True,"token":token,"time":datetime.now()}
-            tokenUser[token] = user
-            print(tokenUser)
+            time = datetime.now()
             return True,{"token":token} 
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
+'''
 def tokenCheck(token,time,reqRoute):
     if token not in tokenUser:
         return False,{"msg":"Token Not Found"}
@@ -31,3 +34,10 @@ def tokenCheck(token,time,reqRoute):
             return True,{"msg":"Success"} 
         return False,{"msg":"Token Expired Please Login Again"} 
     return False,{"msg":"Token Invalid"}
+
+query2 = "select expire_time from users_token where user_id=?"
+result =  cursor.execute(query2,(1,))
+r = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f')
+time = r-datetime.now()
+print(time.seconds)
+'''

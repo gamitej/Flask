@@ -1,5 +1,5 @@
 from flask import Flask,request,jsonify
-from db import authUser,tokenCheck
+from user import authUser 
 from datetime import datetime
 
 app = Flask(__name__)
@@ -7,8 +7,8 @@ app = Flask(__name__)
 @app.route('/login',methods=['POST'])
 def login():
     req = request.get_json()
-    if "user" in req and "password" in req:
-        res,msg = authUser(req["user"],req["password"])
+    if "username" in req and "password" in req:
+        res,msg = authUser(req["username"],req["password"])
         if res:
             return jsonify(msg),200
         return jsonify(msg),404
