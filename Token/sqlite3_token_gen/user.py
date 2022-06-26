@@ -30,12 +30,12 @@ def authUser(username,password):
 def tokenCheck(token,time,reqRoute):
     connection = connect_to_db()
     cursor = connection.cursor()
-    query = "select expire_time from users where token=?"
+    query = "select expire_time from user_token where token=?"
     result =  cursor.execute(query,(token,))
     row = result.fetchone()
     if not row:
         return False,{"msg":"Token Not Found"}
-    expire_time = row[0]
+    expire_time = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f') 
     timeDiff = datetime.now() - expire_time
     if timeDiff.seconds <= 120:
         # for requested route we will increase the expire time by 3 min
@@ -44,8 +44,3 @@ def tokenCheck(token,time,reqRoute):
         return True,{"msg":"Success"} 
     return False,{"msg":"Token Expired Please Login Again"} 
 
-query2 = "select expire_time from users_token where user_id=?"
-result =  cursor.execute(query2,(1,))
-r = datetime.strptime(row[0],'%Y-%m-%d %H:%M:%S.%f')
-time = r-datetime.now()
-print(time.seconds)
