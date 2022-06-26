@@ -6,12 +6,12 @@ from datetime import date, datetime, timedelta
 def connect_to_db():
     connection = sqlite3.connect('data.db')
     return connection
-    
+
 def stringToDateTime(value):
     new_value = datetime.strptime(value, '%Y-%m-%d %H:%M:%S.%f')
     return new_value
 
-def fetchOneRow(rows, table_name, find_by_row, value):
+def selectFromTable(rows, table_name, find_by_row, value):
     connection = connect_to_db()
     cursor = connection.cursor()
     query = f"select {rows} from {table_name} where {find_by_row}=?"
@@ -38,14 +38,14 @@ def updateTable(table_name, rows_to_update, where_cond, values):
 
 def authUser(username, password):
     rows, table_name, find_by_row, value = "user_id,password", "users", "username", username
-    row = fetchOneRow(rows, table_name, find_by_row, value)
+    row = selectFromTable(rows, table_name, find_by_row, value)
     if row:
         user_id, passwd = row[0], row[1]
         if passwd == password:
             token = uuid.uuid1().hex
             time = datetime.now()
             rows, table_name, find_by_row, value = "*", "users_token", "user_id", user_id
-            row = fetchOneRow(rows, table_name, find_by_row, value)
+            row = selectFromTable(rows, table_name, find_by_row, value)
             # -------- INSERT INTO TABLE WHEN TOKEN IS NOT PRESENT -------
             if not row:
                 user = (user_id, token, time)
@@ -61,11 +61,8 @@ def authUser(username, password):
     return False, {"msg": "Username not found"}
 
 def tokenCheck(token, time, reqRoute):
-    connection = connect_to_db()
-    cursor = connection.cursor()
-    query = "select expire_time from users_token where token=?"
-    result = cursor.execute(query, (token,))
-    row = result.fetchone()
+    rows, table_name, find_by_row, value = "expire_time", "users_token", "token", token
+    row = selectFromTable(rows, table_name, find_by_row, value)
     if not row:
         return False, {"msg": "Token Not Found"}
     # ----- To convert into datetime format -------
