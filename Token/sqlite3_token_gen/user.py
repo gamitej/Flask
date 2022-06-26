@@ -65,7 +65,6 @@ def tokenCheck(token, time, reqRoute):
     row = selectFromTable(rows, table_name, find_by_row, value)
     if not row:
         return False, {"msg": "Token Not Found"}
-    # ----- To convert into datetime format -------
     expire_time = stringToDateTime(row[0])
     timeDiff = time - expire_time
     if timeDiff.seconds <= 120:
