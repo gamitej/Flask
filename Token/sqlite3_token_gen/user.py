@@ -35,11 +35,13 @@ def authUser(username,password):
             time = datetime.now()
             rows,table_name,find_by_row,value = "*","users_token","token",token
             row = fetchOneRow(rows,table_name,find_by_row,value)
+            # -------- INSERT INTO TABLE WHEN TOKEN IS NOT PRESENT -------
             if not row:
                 user = (user_id,token,time)
                 table_name,total_values,values = "users_token","(?,?,?)",user
                 insertIntoTable(table_name,total_values,values)
                 return True,{"token":token} 
+            # -------- UPDATE THE TOKEN IF TOKEN IS ALREADY PRESENT -------
         return False,{"msg":"Incorrect Password"} 
     return False,{"msg":"Username not found"}
 
