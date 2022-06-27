@@ -67,3 +67,7 @@ print(sys.path)
 ```
 from file_name import func_name or class_name
 ```
+
+4. You can also make a empty "__int__.py" file in the directory where the calling file is there.
+
+5. "__init__.py" will act like package and we dont have to use the import sys.
