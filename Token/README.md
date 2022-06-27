@@ -68,6 +68,6 @@ print(sys.path)
 from file_name import func_name or class_name
 ```
 
-4. You can also make a empty ```"__int__.py``` file in the directory where the file is located.
+4. You can also make a empty ```__int__.py``` file in the directory where the file is located.
 
 5. ```__init__.py``` will make the directory to act like a package and then we can call it in a simple way.
