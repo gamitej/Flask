@@ -62,7 +62,7 @@ sys.path.append('/home/amitej/Learning/Flask/Token/sqlite3_token_gen')
 print(sys.path)
 ```
 
-3. Now simply call the file name as
+3. Now simply call the file name as you call normally
 
 ```
 from file_name import func_name or class_name
