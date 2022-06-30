@@ -54,7 +54,7 @@ import sys
 print(sys.path)
 ```
 
-2. Append the path in which your file is present
+2. Append the path in which your file is present (This method is not the correct to solve the issue)
 
 ```
 import sys 
