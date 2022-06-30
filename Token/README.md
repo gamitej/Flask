@@ -3,7 +3,7 @@ Different methods to use validation in flask token
 
 ## Use Of Decorater [link](https://www.freecodecamp.org/news/python-decorators-explained-with-examples/)
 
-Here is the syntax for a basic Python decorator:
+Basic Python Decorator Code:
 
 ```
 def my_decorator_func(func):
