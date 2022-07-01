@@ -1,4 +1,3 @@
-from subprocess import call
 from flask import Flask,request,jsonify
 from auth import authUser ,tokenCheck
 from datetime import datetime
@@ -7,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/login',methods=['POST'])
 def login():
-    callMe()
     req = request.get_json()
     if "username" in req and "password" in req:
         res,msg = authUser(req["username"],req["password"])
