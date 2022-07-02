@@ -5,7 +5,7 @@
 3. User will make request to a particular endpoint like ('/summary') then increase the expiry time by 3 minutes.
 4. For normal endpoint like ('/details) just check the token validity.
 
-## To run 
+## To run the backend server
 
 ```
 python3 server/server.py
