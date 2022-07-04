@@ -1,4 +1,4 @@
-## Task - Using SQL database
+## Task - Using SQL Database
 
 1. Create a token when user logged in and token should be valid for 2 minutes.
 2. The API's request should only be accepted when the token is valid.
