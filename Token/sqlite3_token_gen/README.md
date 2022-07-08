@@ -10,3 +10,5 @@
 ```
 python3 server/server.py
 ```
+
+## Some error occured

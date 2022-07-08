@@ -28,6 +28,7 @@ def detail():
 def summary():
     req = request.get_json()
     token = req["token"]
+    print(token)
     time = datetime.now()
     res,msg = tokenCheck(token,time,True)
     if res:
