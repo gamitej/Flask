@@ -11,4 +11,7 @@
 python3 server/server.py
 ```
 
-## Some error occured
+## Encrypt and Decrypt Strings in Python (Link!)[https://www.geeksforgeeks.org/how-to-encrypt-and-decrypt-strings-in-python/]
+
+##  Problem Occured
+- Token Validation Is Incorrect
