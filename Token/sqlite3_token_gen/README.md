@@ -13,11 +13,11 @@ python3 server/server.py
 
 ## Encrypt and Decrypt Strings in Python [Link!](https://www.geeksforgeeks.org/how-to-encrypt-and-decrypt-strings-in-python/)
 
-1. Encryption:
+### Encryption:
 
 Encryption is the process of encoding the data. i.e converting plain text into ciphertext. This conversion is done with a key called an encryption key.
 
-2. Decryption:
+### Decryption:
 
 Decryption is the process of decoding the encoded data. Converting the ciphertext into plain text. This process requires a key that we used for encryption.
 
