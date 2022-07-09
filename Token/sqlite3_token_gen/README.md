@@ -13,5 +13,5 @@ python3 server/server.py
 
 ## Encrypt and Decrypt Strings in Python (Link!)[https://www.geeksforgeeks.org/how-to-encrypt-and-decrypt-strings-in-python/]
 
-##  Problem Occured
+##  Problem Occured During Token Check
 - Token Validation Is Incorrect
