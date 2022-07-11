@@ -27,5 +27,5 @@ Symmetric-key Encryption:
 
 In symmetric-key encryption, the data is encoded and decoded with the same key. This is the easiest way of encryption, but also less secure. The receiver needs the key for decryption, so a safe way need for transferring keys. Anyone with the key can read the data in the middle.
 
-##  Problem Occured During Token Check
+##  Error Occured
 - Token Validation Is Incorrect
